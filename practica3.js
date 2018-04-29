@@ -62,7 +62,7 @@ window.addEventListener("load",function() {
 		stage.insert(new Q.Bloopa({x:1768}));
 		//Coins
 		//Princess
-		var princess= stage.insert(new Q.Peach({x:1920, y:360}));
+		stage.insert(new Q.Peach({x:1920, y:360}));
 	});
 
 	Q.scene("level3", function(stage) {
@@ -80,6 +80,7 @@ window.addEventListener("load",function() {
 		stage.insert(new Q.Goomba({x:646}));
 		stage.insert(new Q.Goomba({x:1360, y:600}));
 		stage.insert(new Q.Goomba({x:1394, y:600}));
+		stage.insert(new Q.Goomba({x:3128, y:364}));
 
 		stage.insert(new Q.Bloopa({x:544}));
 		stage.insert(new Q.Bloopa({x:782}));
@@ -87,15 +88,23 @@ window.addEventListener("load",function() {
 		stage.insert(new Q.Bloopa({x:1292, y:456}));
 		stage.insert(new Q.Bloopa({x:1564}));
 		stage.insert(new Q.Bloopa({x:1598}));
+		stage.insert(new Q.Bloopa({x:2700, y: 636}));
+		stage.insert(new Q.Bloopa({x:1100, y: 296}));
 
 		//Coins
 		stage.insert(new Q.Coin({x:374, y:490}));
 		stage.insert(new Q.Coin({x:646, y:490}));
 		stage.insert(new Q.Coin({x:918, y:490}));
-		stage.insert(new Q.Coin({x:1054, y:286}));
-		stage.insert(new Q.Coin({x:1088, y:286}));
+		stage.insert(new Q.Coin({x:1000, y:286}));
+		stage.insert(new Q.Coin({x:1034, y:286}));
+
+		stage.insert(new Q.Coin({x:1370, y:102}));
+		stage.insert(new Q.Coin({x:1404, y:102}));
+		stage.insert(new Q.Coin({x:1438, y:102}));
+		stage.insert(new Q.Coin({x:1476, y:102}));
+		stage.insert(new Q.Coin({x:1508, y:102}));
 		//Princess
-		stage.insert(new Q.Peach({x:1920, y:360}));
+		stage.insert(new Q.Peach({x:3638, y:213}));
 	});
 
 	Q.scene("HUD", function(stage) {
@@ -164,7 +173,7 @@ window.addEventListener("load",function() {
 
 		Q.input.on("confirm", function(){
 			Q.clearStages();
-			Q.stageScene('level3');
+			Q.stageScene('level1');
 			Q.stageScene("HUD",1);
 		});
 
