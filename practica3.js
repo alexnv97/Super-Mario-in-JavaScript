@@ -28,10 +28,11 @@ window.addEventListener("load",function() {
 		stage.insert(new Q.Coin({x:400}));
 		stage.insert(new Q.Coin({x:450}));
 		stage.insert(new Q.Coin({x:500}));
-		//Blocks of mushroom and flower
-		stage.insert(new Q.QuestionBlockMushroom({x:600, y: 455}));
-		stage.insert(new Q.QuestionBlockFlower({x:750, y: 455}));
-		stage.insert(new Q.Star({x:800, y: 455}));
+
+		//Blocks of mushroom, flower and star
+		stage.insert(new Q.QuestionBlockMushroom({x:570, y: 455}));
+		stage.insert(new Q.QuestionBlockFlower({x:770, y: 455}));
+		stage.insert(new Q.QuestionBlockStar({x:950, y: 455}));
 		//Princess
 		stage.insert(new Q.Peach({x:1950}));
 	});
@@ -224,7 +225,6 @@ window.addEventListener("load",function() {
 			this.add('2d, platformerControls, animation');
 			Q.input.on("fire", this, "shoot");
 			this.on("grown", this, "end_grow");
-			this.on("bump.left, bump.right, bump.top, bump.bottom", this, "collide");
 		},
 
 		step: function(dt) {
@@ -595,13 +595,38 @@ window.addEventListener("load",function() {
 		}
 	});
 
+	Q.Sprite.extend("QuestionBlockStar", {
+		init: function(p){
+			this._super(p, {
+				asset: "question.gif",
+				gravity: 0,
+				open: false
+
+			});
+			this.add("2d");
+			this.on("bump.bottom", this, "hit");
+		},
+
+		hit: function(collision){
+			if (!this.p.open){
+				Q.audio.play('item_rise_big.mp3', {loop: false});
+				this.stage.insert(new Q.Star({x: this.p.x, y: this.p.y-34}));
+				this.p.asset = "block.gif";
+				this.p.open = true;
+			}
+			else
+				Q.audio.play('hit_head.mp3', {loop: false});
+		}
+	});
+
 	Q.Sprite.extend("Star", {
 		init: function(p) {
 			this._super(p, {
 			asset: "star.gif",
-			sensor: true
+			sensor: true,
+			vx: 120
 		});
-			this.add("animation");
+			this.add("2d, animation");
 			this.on("hit",this,"hit");
 		},
 
